@@ -1,15 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { downloadUrl } from "@/lib/api";
-import { extOf, trackingCode } from "@/lib/format";
+import { downloadUrl, type DepotFile } from "@/lib/api";
+import { extOf, formatBytes, trackingCode } from "@/lib/format";
 
 export default function Manifest({
   files,
   loading,
   error,
 }: {
-  files: string[];
+  files: DepotFile[];
   loading: boolean;
   error: string | null;
 }) {
@@ -18,7 +18,7 @@ export default function Manifest({
   const filtered = useMemo(() => {
     if (!query.trim()) return files;
     const q = query.toLowerCase();
-    return files.filter((f) => f.toLowerCase().includes(q));
+    return files.filter((f) => f.file_name.toLowerCase().includes(q));
   }, [files, query]);
 
   return (
@@ -72,29 +72,39 @@ export default function Manifest({
 
       {!loading && !error && filtered.length > 0 && (
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((name, i) => (
+          {filtered.map((file, i) => (
             <li
-              key={name}
+              key={file.file_name}
               className="ticket-edge flex flex-col gap-3 rounded-sm border border-steel-600 bg-steel-800 p-4"
             >
               <div className="flex items-start justify-between gap-2">
-                <span className="shrink-0 rounded-sm border border-steel-600 bg-steel-900 px-1.5 py-1 font-mono text-[10px] font-semibold text-yellow">
-                  {extOf(name)}
+                <span
+                  className="shrink-0 rounded-sm border border-steel-600 bg-steel-900 px-1.5 py-1 font-mono text-[10px] font-semibold text-yellow"
+                  title={file.file_type ?? "unknown type"}
+                >
+                  {extOf(file.file_name)}
                 </span>
                 <span className="font-mono text-[11px] text-steel-500">
-                  {trackingCode(name, i)}
+                  {trackingCode(file.file_name, i)}
                 </span>
               </div>
 
-              <p className="min-w-0 flex-1 break-words text-sm text-paper">{name}</p>
+              <p className="min-w-0 flex-1 break-words text-sm text-paper">
+                {file.file_name}
+              </p>
 
-              <a
-                href={downloadUrl(name)}
-                download={name}
-                className="focus-ring self-start rounded-sm border border-steel-600 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wide text-paper transition-colors hover:border-yellow hover:text-yellow"
-              >
-                Pull ↓
-              </a>
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-mono text-[11px] text-steel-500">
+                  {formatBytes(file.file_size)}
+                </span>
+                <a
+                  href={downloadUrl(file.file_name)}
+                  download={file.file_name}
+                  className="focus-ring self-start rounded-sm border border-steel-600 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wide text-paper transition-colors hover:border-yellow hover:text-yellow"
+                >
+                  Download ↓
+                </a>
+              </div>
             </li>
           ))}
         </ul>
