@@ -2,12 +2,14 @@ export const API_BASE =
   process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "http://localhost:8000";
 
 export interface DepotFile {
-  name: string;
+  file_name: string;
+  file_size: number;
+  file_type: string | null;
 }
 
 export interface FileListResponse {
   count: number;
-  files: string[];
+  files: DepotFile[];
 }
 
 export interface UploadResult {
@@ -42,7 +44,7 @@ export function uploadFile(
         try {
           resolve(JSON.parse(xhr.responseText));
         } catch {
-          reject(new Error("Depot returned an unreadable response."));
+          reject(new Error("Lanshare returned an unreadable response."));
         }
       } else {
         reject(new Error(`Upload rejected (status ${xhr.status}).`));
