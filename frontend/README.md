@@ -1,6 +1,6 @@
-# Depot
+# Lanshare
 
-A frontend for your FastAPI upload/download API. Drag files onto the dock, watch
+A frontend for your FastAPI upload/download API. Drag files into Lanshare, watch
 real upload progress, and pull anything back off the shared manifest.
 
 ## Setup
@@ -37,8 +37,8 @@ app.add_middleware(
 
 ## What's in the box
 
-- `app/page.tsx` — page layout, wires the upload dock to the manifest
-- `components/UploadDock.tsx` — drag-and-drop zone, upload queue, per-file
+- `app/page.tsx` — page layout, wires the upload zone to the manifest
+- `components/UploadZone.tsx` — drag-and-drop zone, upload queue, per-file
   progress bars (via `XMLHttpRequest` so real byte progress is available,
   which `fetch` can't report)
 - `components/Manifest.tsx` — the file list, with search and download

@@ -45,11 +45,11 @@ export function uploadFile(
           reject(new Error("Depot returned an unreadable response."));
         }
       } else {
-        reject(new Error(`Upload rejected at the dock (status ${xhr.status}).`));
+        reject(new Error(`Upload rejected (status ${xhr.status}).`));
       }
     };
 
-    xhr.onerror = () => reject(new Error("Connection to the dock dropped."));
+    xhr.onerror = () => reject(new Error("Connection dropped mid-upload."));
     xhr.onabort = () => reject(new Error("Upload cancelled."));
 
     xhr.send(formData);
@@ -64,7 +64,7 @@ export async function fetchManifest(): Promise<FileListResponse> {
     return { count: 0, files: [] };
   }
   if (!res.ok) {
-    throw new Error("Could not reach the dock.");
+    throw new Error("Could not reach Lanshare.");
   }
   return res.json();
 }
