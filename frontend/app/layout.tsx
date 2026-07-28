@@ -23,7 +23,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Depot — Receiving Dock",
+  title: "Lanshare",
   description: "Send files in. Pull files out.",
 };
 

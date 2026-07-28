@@ -1,5 +1,5 @@
 {
-  "name": "depot",
+  "name": "lanshare",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.35",
+    "next": "^16.2.12",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

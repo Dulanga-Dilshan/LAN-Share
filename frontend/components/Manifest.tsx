@@ -43,7 +43,7 @@ export default function Manifest({
 
       {loading && (
         <div className="rounded-sm border border-steel-600 bg-steel-800/40 px-4 py-8 text-center font-mono text-xs uppercase tracking-widest text-steel-500">
-          Checking the dock…
+          Checking the shelf…
         </div>
       )}
 
@@ -56,10 +56,10 @@ export default function Manifest({
       {!loading && !error && files.length === 0 && (
         <div className="rounded-sm border border-dashed border-steel-600 px-4 py-10 text-center">
           <p className="font-display text-base uppercase tracking-wide text-steel-500">
-            The dock is empty
+            Nothing shared yet
           </p>
           <p className="mt-1 font-mono text-xs text-steel-600">
-            Send something in above and it'll show up here.
+            Send something over and it'll show up here.
           </p>
         </div>
       )}
@@ -71,27 +71,27 @@ export default function Manifest({
       )}
 
       {!loading && !error && filtered.length > 0 && (
-        <ul className="flex flex-col gap-2">
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {filtered.map((name, i) => (
             <li
               key={name}
-              className="ticket-edge flex items-center gap-3 rounded-sm border border-steel-600 bg-steel-800 px-3.5 py-3"
+              className="ticket-edge flex flex-col gap-3 rounded-sm border border-steel-600 bg-steel-800 p-4"
             >
-              <span className="shrink-0 rounded-sm border border-steel-600 bg-steel-900 px-1.5 py-1 font-mono text-[10px] font-semibold text-yellow">
-                {extOf(name)}
-              </span>
-
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm text-paper">{name}</p>
-                <p className="font-mono text-[11px] text-steel-500">
+              <div className="flex items-start justify-between gap-2">
+                <span className="shrink-0 rounded-sm border border-steel-600 bg-steel-900 px-1.5 py-1 font-mono text-[10px] font-semibold text-yellow">
+                  {extOf(name)}
+                </span>
+                <span className="font-mono text-[11px] text-steel-500">
                   {trackingCode(name, i)}
-                </p>
+                </span>
               </div>
+
+              <p className="min-w-0 flex-1 break-words text-sm text-paper">{name}</p>
 
               <a
                 href={downloadUrl(name)}
                 download={name}
-                className="focus-ring shrink-0 rounded-sm border border-steel-600 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wide text-paper transition-colors hover:border-yellow hover:text-yellow"
+                className="focus-ring self-start rounded-sm border border-steel-600 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wide text-paper transition-colors hover:border-yellow hover:text-yellow"
               >
                 Pull ↓
               </a>
