@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import UploadZone from "@/components/UploadZone";
 import Manifest from "@/components/Manifest";
-import { fetchManifest } from "@/lib/api";
+import { fetchManifest, type DepotFile } from "@/lib/api";
 
 export default function Home() {
-  const [files, setFiles] = useState<string[]>([]);
+  const [files, setFiles] = useState<DepotFile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
