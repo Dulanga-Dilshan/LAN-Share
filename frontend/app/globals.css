@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #14181c;
+  color: #e8e4da;
+}
+
+* {
+  scrollbar-color: #3a444c #1e252b;
+}
+
+::selection {
+  background: #f2b705;
+  color: #14181c;
+}
+
+/* Torn / perforated edge for manifest tickets */
+.ticket-edge {
+  background-image: radial-gradient(
+    circle at 6px 6px,
+    transparent 5px,
+    #1e252b 5.5px
+  );
+  background-size: 14px 14px;
+  background-position: -6px -6px;
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid #f2b705;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
