@@ -1,5 +1,13 @@
 # 🚀 LAN-Share
 
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white)
+![License](https://img.shields.io/github/license/Dulanga-Dilshan/LAN-Share)
+![Stars](https://img.shields.io/github/stars/Dulanga-Dilshan/LAN-Share)
+![Issues](https://img.shields.io/github/issues/Dulanga-Dilshan/LAN-Share)
+
 A modern, containerized file-sharing web application that enables users to securely share files across a Local Area Network (LAN). Built with a modern technology stack and designed for easy deployment using Docker.
 
 ## ✨ Features
