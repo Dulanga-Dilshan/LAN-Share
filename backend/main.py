@@ -3,14 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
 import os
-import shutil
 from pathlib import Path
 from services import get_files
 import aiofiles
 
 
 app = FastAPI(root_path="")
-api_router = APIRouter(prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,7 +20,7 @@ app.add_middleware(
 public_dir = 'public'
 os.makedirs(public_dir,exist_ok=True)
 
-@api_router.post('/upload', name="upload_file")
+@app.post('/upload', name="upload_file")
 async def handle_uploads(file: UploadFile = File(...)):
     file_path = os.path.join(public_dir, file.filename)
     chunk_size = 1024 * 1024 * 4 #4MB
@@ -38,7 +36,7 @@ async def handle_uploads(file: UploadFile = File(...)):
     }
 
 
-@api_router.get('/public',name="public_files")
+@app.get('/public',name="public_files")
 async def get_public():
     data = get_files(public_dir)
     if data is None:
@@ -48,7 +46,7 @@ async def get_public():
         )
     return data
 
-@api_router.get('/download/{filename}',name="download_files")
+@app.get('/download/{filename}',name="download_files")
 async def handle_download(filename:str):
     file_path=os.path.join(public_dir,filename)
     if not os.path.exists(file_path):
@@ -63,8 +61,11 @@ async def handle_download(filename:str):
         media_type="application/octet-stream"
     )
 
+@app.get("/test",name="test")
+async def test():
+    return {"message","ok"}
 
-app.include_router(api_router)
+
 
 if __name__ == "__main__":
     uvicorn.run(

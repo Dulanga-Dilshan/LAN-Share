@@ -1,14 +1,40 @@
 services:
+  backend:
+    build: ./backend
+    container_name: lanshare-backend
+    restart: unless-stopped
+    volumes:
+      # Persists uploaded files on the host at ./backend/storage.
+      # Update the container-side path if your FastAPI app's public_dir
+      # isn't /app/storage.
+      - ./backend/storage:/app/storage
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # "" = same-origin/relative requests, routed through the nginx
+        # proxy below. Don't point this at localhost:8000 here — that
+        # would only work on the machine running the browser, not other
+        # devices on the LAN.
+        NEXT_PUBLIC_API_URL: ""
+    container_name: lanshare-frontend
+    restart: unless-stopped
+    expose:
+      - "3000"
+    depends_on:
+      - backend
+
   nginx:
-    image: nginx:alpine
-    container_name: lanshare
+    image: nginx:1.27-alpine
+    container_name: lanshare-nginx
+    restart: unless-stopped
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
-      - ./frontend/dist:/usr/share/nginx/html:ro
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    restart: unless-stopped
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - backend
