@@ -1,24 +1,27 @@
 # 🚀 LAN-Share
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi\&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker\&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx\&logoColor=white)
 ![License](https://img.shields.io/github/license/Dulanga-Dilshan/LAN-Share)
 ![Stars](https://img.shields.io/github/stars/Dulanga-Dilshan/LAN-Share)
 ![Issues](https://img.shields.io/github/issues/Dulanga-Dilshan/LAN-Share)
 
-A modern, containerized file-sharing web application that enables users to securely share files across a Local Area Network (LAN). Built with a modern technology stack and designed for easy deployment using Docker.
+A modern, lightweight, and fully containerized file-sharing application that enables users to share files across a **Local Area Network (LAN)**. The application is built with **Next.js** and **FastAPI**, containerized using **Docker**, and served through **Nginx**.
+
+---
 
 ## ✨ Features
 
 * 📂 Share files with devices connected to the same LAN
-* ⚡ Fast and lightweight web interface
-* 🌐 Modern frontend built with **Next.js**
-* 🚀 High-performance backend powered by **FastAPI**
-* 🐳 Fully containerized with **Docker**
-* 🔄 Reverse proxied through **Nginx**
+* ⚡ Fast and responsive user interface
+* 🚀 High-performance backend powered by FastAPI
+* 🌐 Modern frontend built with Next.js
+* 🐳 Fully containerized using Docker
+* 🔄 Nginx reverse proxy (containerized)
 * 📦 One-command deployment using Docker Compose
+* 💻 Cross-platform (Windows, Linux, macOS)
 
 ---
 
@@ -28,6 +31,7 @@ A modern, containerized file-sharing web application that enables users to secur
 
 * Next.js
 * React
+* TypeScript
 
 ### Backend
 
@@ -46,28 +50,28 @@ A modern, containerized file-sharing web application that enables users to secur
 
 ```text
 LAN-Share/
-├── frontend/        # Next.js application
-├── backend/         # FastAPI application
-├── nginx/           # Nginx configuration
+├── frontend/          # Next.js application
+├── backend/           # FastAPI application
+├── nginx/             # Nginx configuration
 ├── docker-compose.yml
 └── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-### Prerequisites
+## Prerequisites
 
-Make sure you have the following installed:
+Before you begin, make sure you have the following installed:
 
+* Git
 * Docker
 * Docker Compose
-* Git
 
 ---
 
-### Installation
+## Installation
 
 Clone the repository:
 
@@ -89,58 +93,139 @@ cp .env.local.example .env.local
 cd ..
 ```
 
-Build and start all services:
+Build and start all containers:
 
 ```bash
 docker compose up -d --build
 ```
 
-Once the containers are running, open your browser and access the application through the configured Nginx server.
+---
+
+# 🌐 Accessing the Application
+
+After all containers have started successfully, the application can be accessed in two ways.
+
+### Host Machine
+
+If you are using the computer running Docker, open:
+
+```
+http://localhost
+```
+
+### Other Devices on the Same LAN
+
+Devices connected to the same Local Area Network can access the application using the **host machine's IP address**.
+
+To find the IP address of the host machine:
+
+**Windows**
+
+```bash
+ipconfig
+```
+
+Look for the **IPv4 Address** of your active network adapter.
+
+For example:
+
+```
+IPv4 Address . . . . . . . . . : 192.168.1.100
+```
+
+Then other devices can access the application by visiting:
+
+```
+http://192.168.1.100
+```
+
+> **Note:** Every device must be connected to the same Local Area Network (LAN).
 
 ---
 
-## 🐳 Services
+# 🐳 Services
 
-The application consists of the following containers:
+The application consists of three Docker containers.
 
-| Service  | Description                  |
-| -------- | ---------------------------- |
-| Frontend | Next.js web application      |
-| Backend  | FastAPI REST API             |
-| Nginx    | Reverse proxy and web server |
-
----
-
-## 📷 How It Works
-
-1. Open the application in your browser.
-2. Upload the file you want to share.
-3. Devices connected to the same local network can access the shared file through the application.
-4. Download files directly from the web interface.
+| Service  | Description                          |
+| -------- | ------------------------------------ |
+| Frontend | Next.js web application              |
+| Backend  | FastAPI REST API                     |
+| Nginx    | Reverse proxy and static file server |
 
 ---
 
-## 🤝 Contributing
+# 📖 How It Works
+
+1. Start the application using Docker Compose.
+2. Open the application in your browser.
+3. Upload files through the web interface.
+4. Any device connected to the same LAN can access and download the shared files.
+
+---
+
+# 🔧 Development
+
+To stop all running containers:
+
+```bash
+docker compose down
+```
+
+To rebuild the containers after making changes:
+
+```bash
+docker compose up -d --build
+```
+
+View container logs:
+
+```bash
+docker compose logs -f
+```
+
+---
+
+# 🤝 Contributing
 
 Contributions are welcome!
 
-If you'd like to improve the project, feel free to:
+If you'd like to contribute:
 
-* Fork the repository
-* Create a new feature branch
-* Commit your changes
-* Open a Pull Request
+1. Fork the repository
+2. Create a feature branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push your branch
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a Pull Request
 
 ---
 
-## 📄 License
+# 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
+See the **LICENSE** file for more information.
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Dulanga Dilshan**
 
 GitHub: https://github.com/Dulanga-Dilshan
+
